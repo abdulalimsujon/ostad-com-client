@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Jumbotron from '../components/cards/Jumbotron';
 import { useAuth } from '../components/contex/auth';
 
@@ -10,6 +10,10 @@ const Login = () => {
     const [auth, setAuth] = useAuth();
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const hundleLogin = async (e) => {
         e.preventDefault();
@@ -18,9 +22,9 @@ const Login = () => {
 
 
         try {
-            const email = e.target.email.value;
-            const password = e.target.password.value;
-            const { data } = await axios.post("http://localhost:5000/api/v1/login",
+
+            const { data } = await axios.post(
+                `/login`,
                 {
                     email,
                     password
@@ -31,10 +35,17 @@ const Login = () => {
                 toast.error(data.error)
             } else {
 
-                toast.success('successfully login ')
+                console.log(data.user.role);
+
+
                 localStorage.setItem("auth", JSON.stringify(data))
                 setAuth({ ...auth, token: data.token, user: data.user })
-                navigate('/');
+                toast.success('successfully login ')
+                navigate(
+
+                    location.state ||
+                    `/dashboard/${data?.user?.role === 1 ? "admin" : "user"} `
+                );
             }
 
         } catch (error) {
@@ -65,6 +76,7 @@ const Login = () => {
 
                         placeholder="Enter your email"
                         name="email"
+                        onChange={(e) => setEmail(e.target.value)}
 
                     />
                     <br />
@@ -74,6 +86,7 @@ const Login = () => {
 
                         placeholder="Enter your password"
                         name="password"
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <br />
                     <button className="btn btn-primary mb-2" type="submit">

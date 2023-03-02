@@ -1,6 +1,8 @@
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import Menu from "./components/nav/Menu";
+import AdminDashboard from "./pages/admin/Dashboard"
+import Dashboard from "./pages/user/Dashbard"
 
 
 
@@ -8,9 +10,24 @@ import Menu from "./components/nav/Menu";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-
-import PrivateRoute from "./components/routes/PrivateRoute";
 import Home from "./pages/Home";
+import AdminRoute from "./components/routes/AdminRoute";
+import AdminCategory from "./pages/admin/Category"
+import AdminProduct from "./pages/admin/Product"
+import PrivateRoute from "./components/routes/PrivateRoute";
+
+
+const PageNotFound = () => {
+  return (
+
+    <div className="">
+      <h1>404 page not found</h1>
+
+    </div>
+
+
+  )
+}
 
 
 
@@ -26,10 +43,20 @@ function App() {
 
         <Route path="/dashboard" element={<PrivateRoute />}>
 
+          <Route path="user" element={<Dashboard />} />
+        </Route>
 
 
+
+        <Route path="/dashboard" element={<AdminRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/category" element={<AdminCategory />} />
+          <Route path="admin/product" element={<AdminProduct />} />
 
         </Route>
+
+        <Route path="*" element={<PageNotFound />} replace />
+
       </Routes>
 
     </div >

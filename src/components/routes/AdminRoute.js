@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useAuth } from '../contex/auth';
-import Loading from './Login';
+import Loading from '../routes/Loading';
+
 
 const AdminRoute = () => {
     // context
@@ -12,7 +13,7 @@ const AdminRoute = () => {
 
     useEffect(() => {
         const adminCheck = async () => {
-            const { data } = await axios.get(`/admin-check`);
+            const { data } = await axios.get("/isAdmin");
             if (data.ok) {
                 setOk(true);
             } else {
