@@ -8,7 +8,7 @@ const Dashboard = () => {
     const [auth, setAuth] = useAuth();
     return (
         <div>
-            <Jumbotron title="Hellow World" subTitle='Welcome to Admin dashbord page'></Jumbotron>
+            <Jumbotron subTitle="Admin Dashboard"></Jumbotron>
             <div className="container">
                 <div className="row">
                     <div className="col-md-3">
@@ -16,11 +16,14 @@ const Dashboard = () => {
                         <AdminMenu></AdminMenu>
 
                     </div>
-                    <div className="col-md-9">
-                        <ul>
-                            <li>{auth?.user?.name}</li>
-                            <li>{auth?.user?.email}</li>
-                            <li>admin</li>
+                    <div className="col-md-9 ">
+
+                        <div className="p-3 mt-2 mb-2 h4 bg-light">Admin Information</div>
+
+                        <ul className="list-group">
+                            <li className="list-group-item">{auth?.user?.name}</li>
+                            <li className="list-group-item">{auth?.user?.email}</li>
+                            <li className="list-group-item">Admin</li>
                         </ul>
 
                     </div>

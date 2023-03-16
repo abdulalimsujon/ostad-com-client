@@ -18,16 +18,12 @@ const Register = () => {
 
         e.preventDefault();
 
-
-
+        const name = e.target.name.value
+        const email = e.target.email.value
+        const password = e.target.password.value
 
         try {
 
-
-
-            const name = await (e.target.name.value);
-            const email = await (e.target.email.value);
-            const password = await (e.target.password.value);
 
             const { data } = await axios.post(
                 `/register`,

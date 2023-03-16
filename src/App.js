@@ -50,8 +50,8 @@ function App() {
 
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/category" element={<AdminCategory />} />
-          <Route path="admin/product" element={<AdminProduct />} />
+          <Route path="/dashboard/admin/category" element={<AdminCategory />} />
+          <Route path="/dashboard/admin/product" element={<AdminProduct />} />
 
         </Route>
 
